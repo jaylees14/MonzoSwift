@@ -10,28 +10,31 @@ import XCTest
 @testable import MonzoSwift
 
 class MonzoSwiftTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testBalance(){
-        let mockAccount = MonzoAccount(id: "123", description: "A mock account", created: "Never")
+    private let testToken = "REMOVED"
+
+    func testGetAccounts(){
+        let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
+
         let monzo = Monzo.instance
-        monzo.getBalance(for: mockAccount) { (result) in
+        monzo.setAccessToken(testToken)
+        monzo.setAccessToken(testToken)
+        monzo.getAllAccounts { (result) in
             switch result {
             case .error(let error):
                 XCTFail(error.localizedDescription)
-            case .result(let balance):
-                XCTAssertTrue(balance.balance == 0)
+            case .result(let accounts):
+                //TODO: Validate response
+                XCTAssert(accounts.accounts.count >= 0)
+            }
+            outcome.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("Expectation error: \(error)")
             }
         }
+        
     }
     
 }

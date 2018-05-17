@@ -15,7 +15,16 @@ enum Currency: String, Decodable {
 }
 
 
-struct MonzoBalance {
+struct MonzoBalance: Decodable {
+    private enum BalanceKeys: String, CodingKey {
+        case balance = "balance"
+        case totalBalance = "total_balance"
+        case currency = "currency"
+        case spendToday = "spend_today"
+        case localCurrency = "local_currency"
+        case localExchangeRate = "local_exchange_rate"
+    }
+    
     let balance: Int
     let totalBalance: Int
     let currency: Currency
@@ -31,18 +40,7 @@ struct MonzoBalance {
         self.localCurrency = localCurrency
         self.localExchangeRate = localExchangeRate
     }
-}
 
-extension MonzoBalance: Decodable {
-    enum BalanceKeys: String, CodingKey {
-        case balance = "balance"
-        case totalBalance = "total_balance"
-        case currency = "currency"
-        case spendToday = "spend_today"
-        case localCurrency = "local_currency"
-        case localExchangeRate = "local_exchange_rate"
-    }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: BalanceKeys.self)
         
@@ -52,7 +50,7 @@ extension MonzoBalance: Decodable {
         let spendToday = try container.decode(Int.self, forKey: .spendToday)
         let localCurrency = try container.decode(Currency.self, forKey: .localCurrency)
         let localExchangeRate = try container.decode(Int.self, forKey: .localExchangeRate)
-    
+        
         self.init(balance: balance, totalBalance: totalBalance, currency: currency, spendToday: spendToday, localCurrency: localCurrency, localExchangeRate: localExchangeRate)
     }
 }

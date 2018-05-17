@@ -103,8 +103,8 @@
 		69AD0F1020AE138900C44930 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
 				69AD0F1220AE139400C44930 /* Monzo.swift */,
+				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
 				69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */,
 				69AD0F1E20AE188A00C44930 /* MonzoError.swift */,
 			);
