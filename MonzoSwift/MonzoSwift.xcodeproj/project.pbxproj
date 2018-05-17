@@ -10,6 +10,12 @@
 		69AD0EF620AE12AF00C44930 /* MonzoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */; };
 		69AD0EFB20AE12AF00C44930 /* MonzoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */; };
 		69AD0EFD20AE12B000C44930 /* MonzoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69AD0F1320AE139400C44930 /* MonzoBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1120AE139400C44930 /* MonzoBalance.swift */; };
+		69AD0F1420AE139400C44930 /* Monzo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1220AE139400C44930 /* Monzo.swift */; };
+		69AD0F1820AE13AE00C44930 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1620AE13AE00C44930 /* Either.swift */; };
+		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
+		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
+		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,12 @@
 		69AD0EF520AE12AF00C44930 /* MonzoSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonzoSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoSwiftTests.swift; sourceTree = "<group>"; };
 		69AD0EFC20AE12AF00C44930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69AD0F1120AE139400C44930 /* MonzoBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonzoBalance.swift; sourceTree = "<group>"; };
+		69AD0F1220AE139400C44930 /* Monzo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monzo.swift; sourceTree = "<group>"; };
+		69AD0F1620AE13AE00C44930 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		69AD0F1720AE13AE00C44930 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAccount.swift; sourceTree = "<group>"; };
+		69AD0F1E20AE188A00C44930 /* MonzoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +83,8 @@
 		69AD0EEE20AE12AF00C44930 /* MonzoSwift */ = {
 			isa = PBXGroup;
 			children = (
+				69AD0F1020AE138900C44930 /* API */,
+				69AD0F1520AE13A000C44930 /* Utils */,
 				69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */,
 				69AD0EF020AE12AF00C44930 /* Info.plist */,
 			);
@@ -84,6 +98,26 @@
 				69AD0EFC20AE12AF00C44930 /* Info.plist */,
 			);
 			path = MonzoSwiftTests;
+			sourceTree = "<group>";
+		};
+		69AD0F1020AE138900C44930 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
+				69AD0F1220AE139400C44930 /* Monzo.swift */,
+				69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */,
+				69AD0F1E20AE188A00C44930 /* MonzoError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		69AD0F1520AE13A000C44930 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1620AE13AE00C44930 /* Either.swift */,
+				69AD0F1720AE13AE00C44930 /* Network.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +229,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */,
+				69AD0F1320AE139400C44930 /* MonzoBalance.swift in Sources */,
+				69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */,
+				69AD0F1820AE13AE00C44930 /* Either.swift in Sources */,
+				69AD0F1920AE13AE00C44930 /* Network.swift in Sources */,
+				69AD0F1420AE139400C44930 /* Monzo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +433,7 @@
 		69AD0F0420AE12B000C44930 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = MonzoSwiftTests/Info.plist;
@@ -411,6 +452,7 @@
 		69AD0F0520AE12B000C44930 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = MonzoSwiftTests/Info.plist;

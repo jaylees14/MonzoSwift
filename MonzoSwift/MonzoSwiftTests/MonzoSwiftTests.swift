@@ -21,15 +21,16 @@ class MonzoSwiftTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testBalance(){
+        let mockAccount = MonzoAccount(id: "123", description: "A mock account", created: "Never")
+        let monzo = Monzo.instance
+        monzo.getBalance(for: mockAccount) { (result) in
+            switch result {
+            case .error(let error):
+                XCTFail(error.localizedDescription)
+            case .result(let balance):
+                XCTAssertTrue(balance.balance == 0)
+            }
         }
     }
     
