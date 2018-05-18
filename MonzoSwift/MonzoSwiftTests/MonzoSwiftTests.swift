@@ -11,7 +11,7 @@ import XCTest
 
 class MonzoSwiftTests: XCTestCase {
     private let testToken = "REMOVED"
-    private let timeout = 5.0
+    private let timeout = 15.0
 
     func testGetAccounts(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
