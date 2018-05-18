@@ -10,8 +10,16 @@ import XCTest
 @testable import MonzoSwift
 
 class MonzoSwiftTests: XCTestCase {
-    private let testToken = "REMOVED"
+    private var testToken = ""
     private let timeout = 15.0
+    
+    override func setUp() {
+        // We get the Monzo token from the Info.plist
+        // Travis CI deals with this in encrypted format
+        if let path = Bundle(for: MonzoSwiftTests.self).path(forResource: "Info", ofType: "plist"), let info = NSDictionary(contentsOfFile: path) as? [String: Any] {
+            testToken = info["MonzoToken"] as? String ?? ""
+        }
+    }
 
     func testGetAccounts(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
