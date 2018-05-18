@@ -46,7 +46,7 @@ class Monzo {
             return
         }
         
-        let url = apiBase + "/balance?account_id=\(account.accountNumber)"
+        let url = apiBase + "/balance?account_id=\(account.id)"
         Network.getRequest(url: URL(string: url)!, headers: ["Authorization": "Bearer \(token)"]) { (response) in
             switch response {
             case .result(let result):
