@@ -16,6 +16,7 @@
 		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
 		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
 		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
+		69C9F20220B0455F00BB6E3D /* MonzoToken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69C9F20120B0455F00BB6E3D /* MonzoToken.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		69AD0F1720AE13AE00C44930 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAccount.swift; sourceTree = "<group>"; };
 		69AD0F1E20AE188A00C44930 /* MonzoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoError.swift; sourceTree = "<group>"; };
+		69C9F20120B0455F00BB6E3D /* MonzoToken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonzoToken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */,
 				69AD0EFC20AE12AF00C44930 /* Info.plist */,
+				69C9F20120B0455F00BB6E3D /* MonzoToken.txt */,
 			);
 			path = MonzoSwiftTests;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				69AD0EF120AE12AF00C44930 /* Sources */,
 				69AD0EF220AE12AF00C44930 /* Frameworks */,
 				69AD0EF320AE12AF00C44930 /* Resources */,
+				6946913020AF86AE0097ECF3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -219,10 +223,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69C9F20220B0455F00BB6E3D /* MonzoToken.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6946913020AF86AE0097ECF3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		69AD0EE720AE12AF00C44930 /* Sources */ = {

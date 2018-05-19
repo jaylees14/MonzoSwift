@@ -13,17 +13,19 @@ class MonzoSwiftTests: XCTestCase {
     private var testToken = ""
     private let timeout = 15.0
     
+    // MARK: - Test Harness Setup
     override func setUp() {
-        // We get the Monzo token from the Info.plist
-        // Travis CI deals with this in encrypted format
+        // We get the Monzo token from the Info.plist, Travis CI deals with this by using an environment variable and passing as an argument
+        // Locally we should make sure NOT to commit the token
+        // TODO: Store token locally but ignore from Git, preventing errors
         if let path = Bundle(for: MonzoSwiftTests.self).path(forResource: "Info", ofType: "plist"), let info = NSDictionary(contentsOfFile: path) as? [String: Any] {
             testToken = info["MonzoToken"] as? String ?? ""
         }
     }
 
+    // MARK: - Account Retrieval
     func testGetAccounts(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
-
         let monzo = Monzo.instance
         monzo.setAccessToken(testToken)
         monzo.getAllAccounts { (result) in
@@ -31,7 +33,7 @@ class MonzoSwiftTests: XCTestCase {
             case .error(let error):
                 XCTFail(error.localizedDescription)
             case .result(let accounts):
-                //TODO: Validate response
+                // TODO: Validate response
                 XCTAssert(accounts.accounts.count >= 0)
             }
             outcome.fulfill()
@@ -44,6 +46,7 @@ class MonzoSwiftTests: XCTestCase {
         }
     }
     
+    // MARK: - Account Balance
     func testGetBalance(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
         

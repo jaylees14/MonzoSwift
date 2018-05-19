@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "69AD0EEB20AE12AF00C44930"
-            BuildableName = "MonzoSwift.framework"
-            BlueprintName = "MonzoSwift"
+            BlueprintIdentifier = "69AD0EF420AE12AF00C44930"
+            BuildableName = "MonzoSwiftTests.xctest"
+            BlueprintName = "MonzoSwiftTests"
             ReferencedContainer = "container:MonzoSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
