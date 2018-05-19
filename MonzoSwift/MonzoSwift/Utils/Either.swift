@@ -15,7 +15,7 @@ public enum Either<a,b> {
 
 public extension Either {
     //If the value is Left a, apply the first function to a; if it is Right b, apply the second function to b.
-    func either<c>(_ l: (a) -> c, _ r: (b) -> c) -> c {
+    func handle<c>(_ l: (a) -> c, _ r: (b) -> c) -> c {
         switch self {
         case let .error(x):
             return l(x)
