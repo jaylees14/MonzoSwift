@@ -16,7 +16,6 @@
 		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
 		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
 		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
-		69C9F20220B0455F00BB6E3D /* MonzoToken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69C9F20120B0455F00BB6E3D /* MonzoToken.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,7 +222,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C9F20220B0455F00BB6E3D /* MonzoToken.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
