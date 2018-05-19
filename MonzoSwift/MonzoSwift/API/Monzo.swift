@@ -11,7 +11,7 @@ import Foundation
 class Monzo {
     private let apiBase  = "https://api.monzo.com"
     private let authBase = "https://auth.monzo.com"
-    private var defaultHeaders: [String: String]?
+    private var defaultHeaders: [String: String] = [:]
     private var accessToken: String?
     
     
@@ -34,13 +34,13 @@ class Monzo {
     ///
     /// - Parameter callback: Response from Monzo, either an error or a MonzoUser with an array of accounts
     public func getAllAccounts(callback: @escaping (_ accounts: Either<Error, MonzoUser>) -> Void){
-        guard let token = accessToken else {
+        guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
             return
         }
         
         let url = apiBase + "/accounts"
-        Network.getRequest(url: URL(string: url)!, headers: ["Authorization": "Bearer \(token)"]) { (response) in
+        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoUser.self, from: result, then: callback)
@@ -57,16 +57,34 @@ class Monzo {
     ///   - account: The account to check balance for
     ///   - callback: Response from Monzo, either an error or a MonzoBalance
     public func getBalance(for account: MonzoAccount, callback: @escaping (_ balance: Either<Error, MonzoBalance>) -> Void){
-        guard let token = accessToken else {
+        guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
             return
         }
         
         let url = apiBase + "/balance?account_id=\(account.id)"
-        Network.getRequest(url: URL(string: url)!, headers: ["Authorization": "Bearer \(token)"]) { (response) in
+        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoBalance.self, from: result, then: callback)
+            case .error(let error):
+                callback(Either.error(error))
+            }
+        }
+    }
+    
+    // MARK: - Transactions
+    public func getTransactions(for account: MonzoAccount, callback: @escaping (_ transactions: Either<Error, MonzoTransactions>) -> Void){
+        guard accessToken != nil else {
+            callback(Either.error(MonzoError.noAccessToken))
+            return
+        }
+        
+        let url = apiBase + "/transactions?account_id=\(account.id)"
+        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+            switch response {
+            case .result(let result):
+                self.parseJSON(to: MonzoTransactions.self, from: result, then: callback)
             case .error(let error):
                 callback(Either.error(error))
             }
@@ -86,5 +104,7 @@ class Monzo {
             callback(Either.error(fallbackError))
         }
     }
+    
+    
     
 }

@@ -57,6 +57,27 @@ class MonzoSwiftTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+    
+    func testGetTransactions(){
+        let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
+        //FIXME: Extract this to a "MockAccount" class
+        monzo.getAllAccounts { (accountResponse) in
+            accountResponse.handle(self.fail, { (accounts) in
+                guard let account = accounts.accounts.first else {
+                    XCTFail("No accounts available")
+                    return
+                }
+                self.monzo.getTransactions(for: account, callback: { (response) in
+                    response.handle(self.fail, { (transactions) in
+                        print(transactions.transactions.first)
+                        //TODO: Validate transactions
+                    })
+                    outcome.fulfill()
+                })
+            })
+        }
+        waitForExpectations(timeout: timeout)
+    }
 
     fileprivate func fail(with error: Error) {
         XCTFail(error.localizedDescription)

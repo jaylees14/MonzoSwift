@@ -16,6 +16,7 @@
 		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
 		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
 		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
+		69EE48A120B0BF42000C9518 /* MonzoTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAccount.swift; sourceTree = "<group>"; };
 		69AD0F1E20AE188A00C44930 /* MonzoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoError.swift; sourceTree = "<group>"; };
 		69C9F20120B0455F00BB6E3D /* MonzoToken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonzoToken.txt; sourceTree = "<group>"; };
+		69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoTransaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
 				69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */,
 				69AD0F1E20AE188A00C44930 /* MonzoError.swift */,
+				69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */,
 				69AD0F1820AE13AE00C44930 /* Either.swift in Sources */,
 				69AD0F1920AE13AE00C44930 /* Network.swift in Sources */,
+				69EE48A120B0BF42000C9518 /* MonzoTransaction.swift in Sources */,
 				69AD0F1420AE139400C44930 /* Monzo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

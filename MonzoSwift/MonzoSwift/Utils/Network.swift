@@ -55,6 +55,8 @@ class Network {
                 case 200:
                     callback(Either.result(data))
                 default:
+                    print("Unhandled error \(httpStatus.statusCode)")
+                    print("Response \(String(data: data, encoding: .utf8))")
                     callback(Either.error(NetworkError.unhandledResponse))
             }
         }.resume()
