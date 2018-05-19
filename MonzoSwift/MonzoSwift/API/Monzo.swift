@@ -11,17 +11,27 @@ import Foundation
 class Monzo {
     private let apiBase  = "https://api.monzo.com"
     private let authBase = "https://auth.monzo.com"
-    private let clientID = "oauth2client_00009WhuBh9b97lcQhyFg9"
-    private let redirectUri = ""
+    private var defaultHeaders: [String: String]?
     private var accessToken: String?
     
+    
+    /// The shared Monzo API instance
     public static let instance = Monzo()
     private init() {}
 
+    
+    /// Set the access token for future requests
+    ///
+    /// - Parameter token: The access token obtained from Monzo
     public func setAccessToken(_ token: String){
         self.accessToken = token
+        self.defaultHeaders = ["Authorization": "Bearer \(token)"]
     }
     
+    
+    /// Get all accounts associated with the set access token
+    ///
+    /// - Parameter callback: Response from Monzo, either an error or a MonzoUser with an array of accounts
     public func getAllAccounts(callback: @escaping (_ accounts: Either<Error, MonzoUser>) -> Void){
         guard let token = accessToken else {
             callback(Either.error(MonzoError.noAccessToken))
@@ -40,6 +50,11 @@ class Monzo {
     }
     
     
+    /// Retrieve the current balance for the associated Monzo account
+    ///
+    /// - Parameters:
+    ///   - account: The account to check balance for
+    ///   - callback: Response from Monzo, either an error or a MonzoBalance
     public func getBalance(for account: MonzoAccount, callback: @escaping (_ balance: Either<Error, MonzoBalance>) -> Void){
         guard let token = accessToken else {
             callback(Either.error(MonzoError.noAccessToken))
@@ -58,6 +73,8 @@ class Monzo {
     }
     
     
+    // MARK: - Utilities
+    // Parse a JSON response to a decodable type, and callback as necessary
     private func parseJSON<T: Decodable>(to: T.Type, from data: Data, then callback: @escaping (_ result: Either<Error, T>) -> Void){
         do {
             let json = try JSONDecoder().decode(T.self, from: data)

@@ -12,6 +12,7 @@ import XCTest
 class MonzoSwiftTests: XCTestCase {
     private var testToken = ""
     private let timeout = 15.0
+    private let monzo = Monzo.instance
     
     // MARK: - Test Harness Setup
     override func setUp() {
@@ -20,13 +21,12 @@ class MonzoSwiftTests: XCTestCase {
         if let path = Bundle(for: MonzoSwiftTests.self).path(forResource: "Info", ofType: "plist"), let info = NSDictionary(contentsOfFile: path) as? [String: Any] {
             testToken = info["MonzoToken"] as? String ?? ""
         }
+        monzo.setAccessToken(testToken)
     }
 
     // MARK: - Account Retrieval
     func testGetAccounts(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
-        let monzo = Monzo.instance
-        monzo.setAccessToken(testToken)
         monzo.getAllAccounts { (result) in
             result.handle(self.fail, { (accounts) in
                 XCTAssert(accounts.accounts.count >= 0)
@@ -39,9 +39,6 @@ class MonzoSwiftTests: XCTestCase {
     // MARK: - Account Balance
     func testGetBalance(){
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
-        
-        let monzo = Monzo.instance
-        monzo.setAccessToken(testToken)
         //FIXME: Extract this to a "MockAccount" class
         monzo.getAllAccounts { (accountResponse) in
             accountResponse.handle(self.fail, { (accounts) in
@@ -49,7 +46,7 @@ class MonzoSwiftTests: XCTestCase {
                     XCTFail("No accounts available")
                     return
                 }
-                monzo.getBalance(for: account, callback: { (response) in
+                self.monzo.getBalance(for: account, callback: { (response) in
                     response.handle(self.fail, { (balance) in
                         print(balance.balance)
                         //TODO: Validate balance
@@ -61,8 +58,7 @@ class MonzoSwiftTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    func fail(with error: Error) {
+    fileprivate func fail(with error: Error) {
         XCTFail(error.localizedDescription)
     }
-    
 }
