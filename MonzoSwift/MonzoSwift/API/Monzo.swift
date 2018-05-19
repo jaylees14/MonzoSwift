@@ -24,6 +24,7 @@ class Monzo {
     ///
     /// - Parameter token: The access token obtained from Monzo
     public func setAccessToken(_ token: String){
+        // TODO: Validate the token with Monzo, add a callback that requests a new token to be created if needed
         self.accessToken = token
         self.defaultHeaders = ["Authorization": "Bearer \(token)"]
     }

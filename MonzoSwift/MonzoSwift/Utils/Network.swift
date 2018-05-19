@@ -16,6 +16,13 @@ public enum NetworkError: Error {
 typealias NetworkResponse = Either<Error, Data>
 
 class Network {
+    
+    /// Perform a GET request
+    ///
+    /// - Parameters:
+    ///   - url: URL to request
+    ///   - headers: Additional headers to be added to the request
+    ///   - callback: Result of the request, either valid data or an error
     static public func getRequest(url: URL,
                                   headers: [String:String] = [:],
                                   callback: @escaping(_ result: NetworkResponse) -> Void) {
@@ -43,6 +50,7 @@ class Network {
                 return
             }
     
+            //TODO: Handle more responses (eg: Network token)
             switch httpStatus.statusCode {
                 case 200:
                     callback(Either.result(data))

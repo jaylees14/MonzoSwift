@@ -13,7 +13,6 @@ public enum MonzoError: Error {
     case decodingError
 }
 
-
 extension MonzoError: LocalizedError {
     public var errorDescription: String?{
         switch self {
