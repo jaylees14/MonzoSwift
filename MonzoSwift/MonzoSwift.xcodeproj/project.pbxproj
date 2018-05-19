@@ -10,6 +10,12 @@
 		69AD0EF620AE12AF00C44930 /* MonzoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */; };
 		69AD0EFB20AE12AF00C44930 /* MonzoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */; };
 		69AD0EFD20AE12B000C44930 /* MonzoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69AD0F1320AE139400C44930 /* MonzoBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1120AE139400C44930 /* MonzoBalance.swift */; };
+		69AD0F1420AE139400C44930 /* Monzo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1220AE139400C44930 /* Monzo.swift */; };
+		69AD0F1820AE13AE00C44930 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1620AE13AE00C44930 /* Either.swift */; };
+		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
+		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
+		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,13 @@
 		69AD0EF520AE12AF00C44930 /* MonzoSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonzoSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoSwiftTests.swift; sourceTree = "<group>"; };
 		69AD0EFC20AE12AF00C44930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69AD0F1120AE139400C44930 /* MonzoBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonzoBalance.swift; sourceTree = "<group>"; };
+		69AD0F1220AE139400C44930 /* Monzo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monzo.swift; sourceTree = "<group>"; };
+		69AD0F1620AE13AE00C44930 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		69AD0F1720AE13AE00C44930 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAccount.swift; sourceTree = "<group>"; };
+		69AD0F1E20AE188A00C44930 /* MonzoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoError.swift; sourceTree = "<group>"; };
+		69C9F20120B0455F00BB6E3D /* MonzoToken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonzoToken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +84,8 @@
 		69AD0EEE20AE12AF00C44930 /* MonzoSwift */ = {
 			isa = PBXGroup;
 			children = (
+				69AD0F1020AE138900C44930 /* API */,
+				69AD0F1520AE13A000C44930 /* Utils */,
 				69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */,
 				69AD0EF020AE12AF00C44930 /* Info.plist */,
 			);
@@ -82,8 +97,29 @@
 			children = (
 				69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */,
 				69AD0EFC20AE12AF00C44930 /* Info.plist */,
+				69C9F20120B0455F00BB6E3D /* MonzoToken.txt */,
 			);
 			path = MonzoSwiftTests;
+			sourceTree = "<group>";
+		};
+		69AD0F1020AE138900C44930 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1220AE139400C44930 /* Monzo.swift */,
+				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
+				69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */,
+				69AD0F1E20AE188A00C44930 /* MonzoError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		69AD0F1520AE13A000C44930 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1620AE13AE00C44930 /* Either.swift */,
+				69AD0F1720AE13AE00C44930 /* Network.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +161,7 @@
 				69AD0EF120AE12AF00C44930 /* Sources */,
 				69AD0EF220AE12AF00C44930 /* Frameworks */,
 				69AD0EF320AE12AF00C44930 /* Resources */,
+				6946913020AF86AE0097ECF3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -190,11 +227,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6946913020AF86AE0097ECF3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		69AD0EE720AE12AF00C44930 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */,
+				69AD0F1320AE139400C44930 /* MonzoBalance.swift in Sources */,
+				69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */,
+				69AD0F1820AE13AE00C44930 /* Either.swift in Sources */,
+				69AD0F1920AE13AE00C44930 /* Network.swift in Sources */,
+				69AD0F1420AE139400C44930 /* Monzo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,8 +452,10 @@
 		69AD0F0420AE12B000C44930 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95HMAHL2SN;
+				GCC_PREPROCESSOR_DEFINITIONS = "MONZO_TOKEN=$(MONZO_TOKEN)";
 				INFOPLIST_FILE = MonzoSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -411,8 +472,10 @@
 		69AD0F0520AE12B000C44930 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95HMAHL2SN;
+				GCC_PREPROCESSOR_DEFINITIONS = "MONZO_TOKEN=$(MONZO_TOKEN)";
 				INFOPLIST_FILE = MonzoSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

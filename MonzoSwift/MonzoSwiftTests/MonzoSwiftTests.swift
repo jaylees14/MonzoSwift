@@ -10,27 +10,55 @@ import XCTest
 @testable import MonzoSwift
 
 class MonzoSwiftTests: XCTestCase {
+    private var testToken = ""
+    private let timeout = 15.0
+    private let monzo = Monzo.instance
     
+    // MARK: - Test Harness Setup
     override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        // We get the Monzo token from the Info.plist, Travis CI deals with this by using an environment variable and passing as an argument
+        // Locally we use a shell script to place the token in the plist during the builds
+        if let path = Bundle(for: MonzoSwiftTests.self).path(forResource: "Info", ofType: "plist"), let info = NSDictionary(contentsOfFile: path) as? [String: Any] {
+            testToken = info["MonzoToken"] as? String ?? ""
         }
+        monzo.setAccessToken(testToken)
+    }
+
+    // MARK: - Account Retrieval
+    func testGetAccounts(){
+        let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
+        monzo.getAllAccounts { (result) in
+            result.handle(self.fail, { (accounts) in
+                XCTAssert(accounts.accounts.count >= 0)
+            })
+            outcome.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
     }
     
+    // MARK: - Account Balance
+    func testGetBalance(){
+        let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
+        //FIXME: Extract this to a "MockAccount" class
+        monzo.getAllAccounts { (accountResponse) in
+            accountResponse.handle(self.fail, { (accounts) in
+                guard let account = accounts.accounts.first else {
+                    XCTFail("No accounts available")
+                    return
+                }
+                self.monzo.getBalance(for: account, callback: { (response) in
+                    response.handle(self.fail, { (balance) in
+                        print(balance.balance)
+                        //TODO: Validate balance
+                    })
+                    outcome.fulfill()
+                })
+            })
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    fileprivate func fail(with error: Error) {
+        XCTFail(error.localizedDescription)
+    }
 }
