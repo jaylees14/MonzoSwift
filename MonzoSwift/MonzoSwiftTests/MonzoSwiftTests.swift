@@ -23,6 +23,18 @@ class MonzoSwiftTests: XCTestCase {
         }
         monzo.setAccessToken(testToken)
     }
+    
+    //MARK: - Validate Access Token
+    func testValidation(){
+        let outcome = expectation(description: "Monzo validates access token")
+        monzo.validateAccessToken { (response) in
+            response.handle(self.fail, { success  in
+                XCTAssertTrue(success)
+            })
+            outcome.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
 
     // MARK: - Account Retrieval
     func testGetAccounts(){

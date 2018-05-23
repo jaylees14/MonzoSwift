@@ -19,17 +19,49 @@ class Monzo {
     public static let instance = Monzo()
     private init() {}
 
-    
+    // MARK: - Access Tokens
     /// Set the access token for future requests
     ///
     /// - Parameter token: The access token obtained from Monzo
     public func setAccessToken(_ token: String){
-        // TODO: Validate the token with Monzo, add a callback that requests a new token to be created if needed
         self.accessToken = token
         self.defaultHeaders = ["Authorization": "Bearer \(token)"]
     }
     
+    public func validateAccessToken(callback: @escaping (_ result: Either<Error, Bool>) -> Void ){
+        let url = apiBase + "/ping/whoami"
+        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+            switch response {
+            case .result(let result):
+                self.parseJSON(to: MonzoAuthentication.self, from: result, then: self.determineAuthStatus(then: callback))
+            
+            // Monzo returns a 401 error if the token isn't authenticated
+            case .error(let error as NetworkError):
+                switch error {
+                case .error(code: let code, response: _):
+                    callback(code == 401 ? Either.result(false) : Either.error(error))
+                default:
+                    callback(Either.error(error))
+                }
+            
+            // Failing the NetworkError check, default to a standard error
+            case .error(let error):
+                callback(Either.error(error))
+            }
+        }
+    }
     
+    fileprivate func determineAuthStatus(then callback: @escaping (_ result: Either<Error, Bool>) -> Void ) -> (Either<Error, MonzoAuthentication>) -> Void {
+        return { response in
+            response.handle({ error in
+                callback(Either.error(error))
+            }, { auth in
+                callback(Either.result(auth.authenticated))
+            })
+        }
+    }
+    
+    //MARK: - Accounts
     /// Get all accounts associated with the set access token
     ///
     /// - Parameter callback: Response from Monzo, either an error or a MonzoUser with an array of accounts
@@ -50,7 +82,7 @@ class Monzo {
         }
     }
     
-    
+    // MARK: - Balance
     /// Retrieve the current balance for the associated Monzo account
     ///
     /// - Parameters:
@@ -98,13 +130,9 @@ class Monzo {
         do {
             let json = try JSONDecoder().decode(T.self, from: data)
             callback(Either.result(json))
-        } catch let decoderError as DecodingError {
-            callback(Either.error(decoderError))
-        } catch let fallbackError {
-            callback(Either.error(fallbackError))
+        } catch let error {
+            callback(Either.error(error))
         }
     }
-    
-    
     
 }

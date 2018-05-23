@@ -10,7 +10,7 @@ import Foundation
 
 public enum NetworkError: Error {
     case invalidResponse
-    case unhandledResponse
+    case error(code: Int, response: String)
 }
 
 typealias NetworkResponse = Either<Error, Data>
@@ -50,14 +50,11 @@ class Network {
                 return
             }
     
-            //TODO: Handle more responses (eg: Network token)
             switch httpStatus.statusCode {
-                case 200:
-                    callback(Either.result(data))
-                default:
-                    print("Unhandled error \(httpStatus.statusCode)")
-                    print("Response \(String(data: data, encoding: .utf8))")
-                    callback(Either.error(NetworkError.unhandledResponse))
+            case 200:
+                callback(Either.result(data))
+            default:
+                callback(Either.error(NetworkError.error(code: httpStatus.statusCode, response: String(data: data, encoding: .utf8) ?? "Could not decode response" )))
             }
         }.resume()
     }
