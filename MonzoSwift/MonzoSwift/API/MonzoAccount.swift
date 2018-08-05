@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct MonzoUser: Decodable {
+public struct MonzoUser: Decodable {
     var accounts: [MonzoAccount]
 }
 
-struct MonzoAccount: Decodable {
-    private enum AccountKeys: String, CodingKey {
+public struct MonzoAccount: Decodable {
+    private enum CodingKeys: String, CodingKey {
         case closed = "closed"
         case created = "created"
         case description = "description"
@@ -42,27 +42,11 @@ struct MonzoAccount: Decodable {
         self.type = type
         self.accountNumber = accountNumber
         self.sortCode = sortCode
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: AccountKeys.self)
-        
-        let closed = try container.decode(Bool.self, forKey: .closed)
-        let created = try container.decode(String.self, forKey: .created)
-        let description = try container.decode(String.self, forKey: .description)
-        let id = try container.decode(String.self, forKey: .id)
-        let owners = try container.decode(Array<MonzoOwner>.self, forKey: .owners)
-        let type = try container.decode(String.self, forKey: .type)
-        let accountNumber = try container.decodeIfPresent(String.self, forKey: .accountNumber)
-        let sortCode = try container.decodeIfPresent(String.self, forKey: .sortCode)
-        
-        self.init(closed: closed, created: created, description: description, id: id, owners: owners, type: type, accountNumber: accountNumber, sortCode: sortCode)
-    }
-    
+    }    
 }
 
-struct MonzoOwner: Decodable {
-    private enum OwnerKeys: String, CodingKey {
+public struct MonzoOwner: Decodable {
+    private enum CodingKeys: String, CodingKey {
         case preferredName = "preferred_name"
         case userID = "user_id"
     }
@@ -73,13 +57,5 @@ struct MonzoOwner: Decodable {
     init(preferredName: String, userID: String){
         self.preferredName = preferredName
         self.userID = userID
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: OwnerKeys.self)
-        
-        let preferredName = try container.decode(String.self, forKey: .preferredName)
-        let userID = try container.decode(String.self, forKey: .userID)
-        self.init(preferredName: preferredName, userID: userID)
     }
 }

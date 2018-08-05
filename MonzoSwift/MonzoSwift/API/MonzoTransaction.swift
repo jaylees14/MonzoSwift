@@ -9,12 +9,12 @@
 import Foundation
 
 // FIX THIS!
-struct MonzoTransactions: Decodable {
+public struct MonzoTransactions: Decodable {
     var transactions: [MonzoTransaction]
 }
 
-struct MonzoTransaction: Decodable {
-    private enum TransactionKeys: String, CodingKey {
+public struct MonzoTransaction: Decodable {
+    private enum CodingKeys: String, CodingKey {
         case accountBalance = "account_balance"
         case amount = "amount"
         case created = "created"
@@ -29,18 +29,18 @@ struct MonzoTransaction: Decodable {
         case category = "category"
     }
     
-    var accountBalance: Int
-    var amount: Int
-    var created: String
-    var currency: Currency
-    var description: String
-    var id: String
-    var merchant: String?
-    var metadata: [String: String]
-    var notes: String
-    var isLoad: Bool
-    var settled: String
-    var category: String
+    let accountBalance: Int
+    let amount: Int
+    let created: String
+    let currency: Currency
+    let description: String
+    let id: String
+    let merchant: String?
+    let metadata: [String: String]
+    let notes: String
+    let isLoad: Bool
+    let settled: String
+    let category: String
     
     init(accountBalance: Int, amount: Int, created: String, currency: Currency, description: String, id: String, merchant: String?, metadata: [String:String], notes: String, isLoad: Bool, settled: String, category: String){
         self.accountBalance = accountBalance
@@ -55,23 +55,5 @@ struct MonzoTransaction: Decodable {
         self.isLoad = isLoad
         self.settled = settled
         self.category = category
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: TransactionKeys.self)
-        
-        let accountBalance = try container.decode(Int.self, forKey: .accountBalance)
-        let amount = try container.decode(Int.self, forKey: .amount)
-        let created = try container.decode(String.self, forKey: .created)
-        let currency = try container.decode(Currency.self, forKey: .currency)
-        let description = try container.decode(String.self, forKey: .description)
-        let id = try container.decode(String.self, forKey: .id)
-        let merchant = try container.decodeIfPresent(String.self, forKey: .merchant)
-        let metadata = try container.decode([String: String].self, forKey: .metadata)
-        let notes = try container.decode(String.self, forKey: .notes)
-        let isLoad = try container.decode(Bool.self, forKey: .isLoad)
-        let settled = try container.decode(String.self, forKey: .settled)
-        let category = try container.decode(String.self, forKey: .category)
-        self.init(accountBalance: accountBalance, amount: amount, created: created, currency: currency, description: description, id: id, merchant: merchant, metadata: metadata, notes: notes, isLoad: isLoad, settled: settled, category: category)
     }
 }

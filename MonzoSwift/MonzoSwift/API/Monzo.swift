@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import SafariServices
 
-class Monzo {
+public class Monzo {
     private let apiBase  = "https://api.monzo.com"
     private let authBase = "https://auth.monzo.com"
-    private var defaultHeaders: [String: String] = [:]
+    private var defaultHeaders: [String: String]
     private var accessToken: String?
-    
     
     /// The shared Monzo API instance
     public static let instance = Monzo()
-    private init() {}
+    private init() {
+        defaultHeaders = [:]
+    }
 
     // MARK: - Access Tokens
     /// Set the access token for future requests
@@ -30,7 +32,7 @@ class Monzo {
     
     public func validateAccessToken(callback: @escaping (_ result: Either<Error, Bool>) -> Void ){
         let url = apiBase + "/ping/whoami"
-        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+        Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoAuthentication.self, from: result, then: self.determineAuthStatus(then: callback))
@@ -51,6 +53,7 @@ class Monzo {
         }
     }
     
+    // Internal method for unwrapping a MonzoAuthentication class into a Boolean
     fileprivate func determineAuthStatus(then callback: @escaping (_ result: Either<Error, Bool>) -> Void ) -> (Either<Error, MonzoAuthentication>) -> Void {
         return { response in
             response.handle({ error in
@@ -58,6 +61,23 @@ class Monzo {
             }, { auth in
                 callback(Either.result(auth.authenticated))
             })
+        }
+    }
+    
+    public func requestNewAuthToken(clientID: String, clientSecret: String, refreshToken: String, _ callback: @escaping (Either<Error, String>) -> Void){
+        let url = apiBase + "/oauth2/token"
+        let body: [String: String] = ["grant_type": "refresh_token",
+                                      "client_id" : clientID,
+                                      "client_secret": clientSecret,
+                                      "refresh_token": refreshToken]
+        
+        Network.request(requestType: .post, url: URL(string: url)!, body: body) { (response) in
+            switch response {
+            case .result(let result):
+                print(String(data: result, encoding: .utf8))
+            case .error(let error):
+                callback(Either.error(error))
+            }
         }
     }
     
@@ -72,7 +92,7 @@ class Monzo {
         }
         
         let url = apiBase + "/accounts"
-        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+        Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoUser.self, from: result, then: callback)
@@ -95,7 +115,7 @@ class Monzo {
         }
         
         let url = apiBase + "/balance?account_id=\(account.id)"
-        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+        Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoBalance.self, from: result, then: callback)
@@ -113,7 +133,7 @@ class Monzo {
         }
         
         let url = apiBase + "/transactions?account_id=\(account.id)"
-        Network.getRequest(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+        Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
                 self.parseJSON(to: MonzoTransactions.self, from: result, then: callback)

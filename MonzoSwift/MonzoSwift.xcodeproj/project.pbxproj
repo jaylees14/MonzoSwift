@@ -245,7 +245,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi";
+			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

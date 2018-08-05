@@ -13,27 +13,34 @@ public enum NetworkError: Error {
     case error(code: Int, response: String)
 }
 
+public enum RequestType: String {
+    case get = "GET"
+    case post = "POST"
+}
+
 typealias NetworkResponse = Either<Error, Data>
 
 class Network {
     
-    /// Perform a GET request
+    /// Perform a network request
     ///
     /// - Parameters:
+    ///   - requestType: Type of request (GET/POST)
     ///   - url: URL to request
     ///   - headers: Additional headers to be added to the request
+    ///   - body: Request body contents
     ///   - callback: Result of the request, either valid data or an error
-    static public func getRequest(url: URL,
-                                  headers: [String:String] = [:],
-                                  callback: @escaping(_ result: NetworkResponse) -> Void) {
+    static public func request(requestType: RequestType = .get,
+                               url: URL,
+                               headers: [String:String] = [:],
+                               body: [String: String] = [:],
+                               callback: @escaping(_ result: NetworkResponse) -> Void) {
+        
         var request = URLRequest(url: url)
+        headers.forEach({request.addValue($0.value, forHTTPHeaderField: $0.key)})
+        request.httpMethod = requestType.rawValue
+        request.httpBody = body.compactMap({"\($0.key)=\($0.value)"}).joined(separator: "&").data(using: .utf8)
         
-        //FIXME: Make this a class? With this property available as a param not incorrectly formatted dict
-        for header in headers {
-            request.addValue(header.value, forHTTPHeaderField: header.key)
-        }
-        
-        request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 callback(Either.error(error!))
