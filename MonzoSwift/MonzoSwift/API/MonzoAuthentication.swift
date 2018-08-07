@@ -18,10 +18,4 @@ internal struct MonzoAuthentication: Decodable {
     let authenticated: Bool
     let clientID: String?
     let userID: String?
-
-    init(authenticated: Bool, clientID: String?, userID: String?){
-        self.authenticated = authenticated
-        self.clientID = clientID
-        self.userID = userID
-    }
 }

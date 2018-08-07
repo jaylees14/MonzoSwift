@@ -13,6 +13,10 @@ public struct MonzoTransactions: Decodable {
     var transactions: [MonzoTransaction]
 }
 
+public struct MonzoTransactionWrapper: Decodable {
+    var transaction: MonzoTransaction
+}
+
 public struct MonzoTransaction: Decodable {
     private enum CodingKeys: String, CodingKey {
         case accountBalance = "account_balance"
@@ -41,19 +45,4 @@ public struct MonzoTransaction: Decodable {
     let isLoad: Bool
     let settled: String
     let category: String
-    
-    init(accountBalance: Int, amount: Int, created: String, currency: Currency, description: String, id: String, merchant: String?, metadata: [String:String], notes: String, isLoad: Bool, settled: String, category: String){
-        self.accountBalance = accountBalance
-        self.amount = amount
-        self.created = created
-        self.currency = currency
-        self.description = description
-        self.id = id
-        self.merchant = merchant
-        self.metadata = metadata
-        self.notes = notes
-        self.isLoad = isLoad
-        self.settled = settled
-        self.category = category
-    }
 }

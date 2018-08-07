@@ -24,25 +24,14 @@ public struct MonzoAccount: Decodable {
         case sortCode = "sort_code"
     }
     
-    var closed: Bool
-    var created: String
-    var description: String
-    var id: String
-    var owners: [MonzoOwner]
-    var type: String
-    var accountNumber: String?
-    var sortCode: String?
-    
-    init(closed: Bool, created: String, description: String, id: String, owners: [MonzoOwner], type: String, accountNumber: String?, sortCode: String?){
-        self.closed = closed
-        self.created = created
-        self.description = description
-        self.id = id
-        self.owners = owners
-        self.type = type
-        self.accountNumber = accountNumber
-        self.sortCode = sortCode
-    }    
+    let closed: Bool
+    let created: String
+    let description: String
+    let id: String
+    let owners: [MonzoOwner]
+    let type: String
+    let accountNumber: String?
+    let sortCode: String?
 }
 
 public struct MonzoOwner: Decodable {
@@ -51,11 +40,6 @@ public struct MonzoOwner: Decodable {
         case userID = "user_id"
     }
     
-    var preferredName: String
-    var userID: String
-    
-    init(preferredName: String, userID: String){
-        self.preferredName = preferredName
-        self.userID = userID
-    }
+    let preferredName: String
+    let userID: String
 }

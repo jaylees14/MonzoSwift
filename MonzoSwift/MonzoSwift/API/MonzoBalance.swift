@@ -31,13 +31,4 @@ public struct MonzoBalance: Decodable {
     let spendToday: Int
     let localCurrency: Currency
     let localExchangeRate: Int
-    
-    init(balance: Int, totalBalance: Int, currency: Currency, spendToday: Int, localCurrency: Currency, localExchangeRate: Int){
-        self.balance = balance
-        self.totalBalance = totalBalance
-        self.currency = currency
-        self.spendToday = spendToday
-        self.localCurrency = localCurrency
-        self.localExchangeRate = localExchangeRate
-    }
 }

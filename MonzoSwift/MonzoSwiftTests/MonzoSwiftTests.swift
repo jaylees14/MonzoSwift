@@ -81,7 +81,7 @@ class MonzoSwiftTests: XCTestCase {
                 }
                 self.monzo.getTransactions(for: account, callback: { (response) in
                     response.handle(self.fail, { (transactions) in
-                        print(transactions.transactions.first)
+                        assert(transactions.transactions.count > 0)
                         //TODO: Validate transactions
                     })
                     outcome.fulfill()
@@ -90,8 +90,36 @@ class MonzoSwiftTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+    
+    func testGetTransaction(){
+        let outcome = expectation(description: "Monzo returns the first transaction from the account")
+        monzo.getAllAccounts { (accountResponse) in
+            accountResponse.handle(self.fail, { (accounts) in
+                guard let account = accounts.accounts.first else {
+                    XCTFail("No accounts available")
+                    return
+                }
+                self.monzo.getTransactions(for: account, callback: { (transactionsResponse) in
+                    transactionsResponse.handle(self.fail, { (transactions) in
+                        guard let transaction = transactions.transactions.first else {
+                            XCTFail("No transactions available")
+                            return
+                        }
+                        self.monzo.getTransaction(for: transaction.id, callback: { (response) in
+                            response.handle(self.fail, { (transaction) in
+                                assert(transaction.transaction.amount > 0)
+                            })
+                            outcome.fulfill()
+                        })
+                    })
+                })
+            })
+        }
+        waitForExpectations(timeout: timeout)
+    }
 
     fileprivate func fail(with error: Error) {
+        print("Failed with \(error.localizedDescription)")
         XCTFail(error.localizedDescription)
     }
 }

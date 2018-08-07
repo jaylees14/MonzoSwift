@@ -8,10 +8,6 @@
 
 import Foundation
 
-public enum NetworkError: Error {
-    case invalidResponse
-    case error(code: Int, response: String)
-}
 
 public enum RequestType: String {
     case get = "GET"

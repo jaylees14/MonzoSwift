@@ -143,6 +143,23 @@ public class Monzo {
         }
     }
     
+    public func getTransaction(for id: String, callback: @escaping ((Either<Error, MonzoTransactionWrapper>) -> Void)){
+        guard accessToken != nil else {
+            callback(Either.error(MonzoError.noAccessToken))
+            return
+        }
+        
+        let url = apiBase + "/transactions/\(id)"
+        Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
+            switch response {
+            case .result(let result):
+                self.parseJSON(to: MonzoTransactionWrapper.self, from: result, then: callback)
+            case .error(let error):
+                callback(Either.error(error))
+            }
+        }
+    }
+    
     
     // MARK: - Utilities
     // Parse a JSON response to a decodable type, and callback as necessary

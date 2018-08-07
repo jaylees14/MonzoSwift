@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		693DC057211A2E93006A1143 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693DC056211A2E93006A1143 /* NetworkError.swift */; };
 		69AD0EF620AE12AF00C44930 /* MonzoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */; };
 		69AD0EFB20AE12AF00C44930 /* MonzoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */; };
 		69AD0EFD20AE12B000C44930 /* MonzoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		693DC056211A2E93006A1143 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MonzoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonzoSwift.h; sourceTree = "<group>"; };
 		69AD0EF020AE12AF00C44930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		693DC055211A2E85006A1143 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1720AE13AE00C44930 /* Network.swift */,
+				693DC056211A2E93006A1143 /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		69AD0EE220AE12AF00C44930 = {
 			isa = PBXGroup;
 			children = (
@@ -123,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				69AD0F1620AE13AE00C44930 /* Either.swift */,
-				69AD0F1720AE13AE00C44930 /* Network.swift */,
+				693DC055211A2E85006A1143 /* Network */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -260,6 +271,7 @@
 				69AD0F1820AE13AE00C44930 /* Either.swift in Sources */,
 				69AD0F1920AE13AE00C44930 /* Network.swift in Sources */,
 				69EE48A120B0BF42000C9518 /* MonzoTransaction.swift in Sources */,
+				693DC057211A2E93006A1143 /* NetworkError.swift in Sources */,
 				69AD0F1420AE139400C44930 /* Monzo.swift in Sources */,
 				69CA047420B5D77E003C5523 /* MonzoAuthentication.swift in Sources */,
 			);
