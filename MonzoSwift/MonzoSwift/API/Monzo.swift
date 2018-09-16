@@ -30,6 +30,9 @@ public class Monzo {
         self.defaultHeaders = ["Authorization": "Bearer \(token)"]
     }
     
+    /// Validate your existing access token
+    ///
+    /// - Parameter callback: Response from Monzo, either an error or boolean indicating whether it is valid or not.
     public func validateAccessToken(callback: @escaping (_ result: Either<Error, Bool>) -> Void ){
         let url = apiBase + "/ping/whoami"
         Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
@@ -68,7 +71,7 @@ public class Monzo {
     /// Get all accounts associated with the set access token
     ///
     /// - Parameter callback: Response from Monzo, either an error or a MonzoUser with an array of accounts
-    public func getAllAccounts(callback: @escaping (_ accounts: Either<Error, MonzoUser>) -> Void){
+    public func getAllAccounts(callback: @escaping (_ accounts: Either<Error, [MonzoAccount]>) -> Void){
         guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
             return
@@ -78,7 +81,11 @@ public class Monzo {
         Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
-                self.parseJSON(to: MonzoUser.self, from: result, then: callback)
+                guard let accounts = self.extractField("accounts", from: result) else {
+                    callback(Either.error(MonzoError.decodingError))
+                    return
+                }
+                self.parseJSON(to: Array<MonzoAccount>.self, from: accounts, then: callback)
             case .error(let error):
                 callback(Either.error(error))
             }

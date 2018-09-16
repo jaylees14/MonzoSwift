@@ -8,10 +8,6 @@
 
 import Foundation
 
-public struct MonzoUser: Decodable {
-    var accounts: [MonzoAccount]
-}
-
 public struct MonzoAccount: Decodable {
     private enum CodingKeys: String, CodingKey {
         case closed = "closed"

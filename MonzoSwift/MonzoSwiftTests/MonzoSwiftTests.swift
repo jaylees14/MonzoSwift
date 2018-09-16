@@ -41,7 +41,7 @@ class MonzoSwiftTests: XCTestCase {
         let outcome = expectation(description: "Monzo returns a list of accounts associated with the token")
         monzo.getAllAccounts { (result) in
             result.handle(self.fail, { (accounts) in
-                XCTAssert(accounts.accounts.count >= 0)
+                XCTAssert(accounts.count >= 0)
             })
             outcome.fulfill()
         }
@@ -54,7 +54,7 @@ class MonzoSwiftTests: XCTestCase {
         //FIXME: Extract this to a "MockAccount" class
         monzo.getAllAccounts { (accountResponse) in
             accountResponse.handle(self.fail, { (accounts) in
-                guard let account = accounts.accounts.first else {
+                guard let account = accounts.first else {
                     XCTFail("No accounts available")
                     return
                 }
@@ -75,7 +75,7 @@ class MonzoSwiftTests: XCTestCase {
         //FIXME: Extract this to a "MockAccount" class
         monzo.getAllAccounts { (accountResponse) in
             accountResponse.handle(self.fail, { (accounts) in
-                guard let account = accounts.accounts.first else {
+                guard let account = accounts.first else {
                     XCTFail("No accounts available")
                     return
                 }
@@ -95,7 +95,7 @@ class MonzoSwiftTests: XCTestCase {
         let outcome = expectation(description: "Monzo returns the first transaction from the account")
         monzo.getAllAccounts { (accountResponse) in
             accountResponse.handle(self.fail, { (accounts) in
-                guard let account = accounts.accounts.first else {
+                guard let account = accounts.first else {
                     XCTFail("No accounts available")
                     return
                 }

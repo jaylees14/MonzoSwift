@@ -54,6 +54,14 @@ monzo.getAllAccounts { (response) in
 
 ## API Methods
 
+### Validation of Auth Token
+
+Validate your existing auth token
+
+```swift
+public func validateAccessToken(callback: @escaping (_ result: Either<Error, Bool>) -> Void )
+```
+
 ### Accounts
 
 Request all of the accounts associated with your access token
@@ -82,4 +90,5 @@ Request a specific transaction id for your associated access token
 ```swift
 public func getTransaction(for id: String, callback: @escaping ((Either<Error, MonzoTransaction>) -> Void))
 ```
+
 
