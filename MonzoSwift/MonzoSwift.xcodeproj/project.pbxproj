@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		693DC057211A2E93006A1143 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693DC056211A2E93006A1143 /* NetworkError.swift */; };
-		6986AB7E214EB62900BE7BB6 /* MonzoToken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6986AB7D214EB62900BE7BB6 /* MonzoToken.txt */; };
 		69AD0EF620AE12AF00C44930 /* MonzoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */; };
 		69AD0EFB20AE12AF00C44930 /* MonzoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */; };
 		69AD0EFD20AE12B000C44930 /* MonzoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -240,7 +239,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6986AB7E214EB62900BE7BB6 /* MonzoToken.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
