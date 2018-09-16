@@ -8,15 +8,6 @@
 
 import Foundation
 
-// FIX THIS!
-public struct MonzoTransactions: Decodable {
-    var transactions: [MonzoTransaction]
-}
-
-public struct MonzoTransactionWrapper: Decodable {
-    var transaction: MonzoTransaction
-}
-
 public struct MonzoTransaction: Decodable {
     private enum CodingKeys: String, CodingKey {
         case accountBalance = "account_balance"

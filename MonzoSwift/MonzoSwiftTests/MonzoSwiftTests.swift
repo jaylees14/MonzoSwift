@@ -81,7 +81,7 @@ class MonzoSwiftTests: XCTestCase {
                 }
                 self.monzo.getTransactions(for: account, callback: { (response) in
                     response.handle(self.fail, { (transactions) in
-                        assert(transactions.transactions.count > 0)
+                        assert(transactions.count > 0)
                         //TODO: Validate transactions
                     })
                     outcome.fulfill()
@@ -101,13 +101,13 @@ class MonzoSwiftTests: XCTestCase {
                 }
                 self.monzo.getTransactions(for: account, callback: { (transactionsResponse) in
                     transactionsResponse.handle(self.fail, { (transactions) in
-                        guard let transaction = transactions.transactions.first else {
+                        guard let transaction = transactions.first else {
                             XCTFail("No transactions available")
                             return
                         }
                         self.monzo.getTransaction(for: transaction.id, callback: { (response) in
                             response.handle(self.fail, { (transaction) in
-                                assert(transaction.transaction.amount > 0)
+                                assert(transaction.amount > 0)
                             })
                             outcome.fulfill()
                         })

@@ -64,23 +64,6 @@ public class Monzo {
         }
     }
     
-    public func requestNewAuthToken(clientID: String, clientSecret: String, refreshToken: String, _ callback: @escaping (Either<Error, String>) -> Void){
-        let url = apiBase + "/oauth2/token"
-        let body: [String: String] = ["grant_type": "refresh_token",
-                                      "client_id" : clientID,
-                                      "client_secret": clientSecret,
-                                      "refresh_token": refreshToken]
-        
-        Network.request(requestType: .post, url: URL(string: url)!, body: body) { (response) in
-            switch response {
-            case .result(let result):
-                print(String(data: result, encoding: .utf8))
-            case .error(let error):
-                callback(Either.error(error))
-            }
-        }
-    }
-    
     //MARK: - Accounts
     /// Get all accounts associated with the set access token
     ///
@@ -126,7 +109,7 @@ public class Monzo {
     }
     
     // MARK: - Transactions
-    public func getTransactions(for account: MonzoAccount, callback: @escaping (_ transactions: Either<Error, MonzoTransactions>) -> Void){
+    public func getTransactions(for account: MonzoAccount, callback: @escaping (_ transactions: Either<Error, [MonzoTransaction]>) -> Void){
         guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
             return
@@ -136,14 +119,18 @@ public class Monzo {
         Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
-                self.parseJSON(to: MonzoTransactions.self, from: result, then: callback)
+                guard let transactions = self.extractField("transactions", from: result) else {
+                    callback(Either.error(MonzoError.decodingError))
+                    return
+                }
+                self.parseJSON(to: Array<MonzoTransaction>.self, from: transactions, then: callback)
             case .error(let error):
                 callback(Either.error(error))
             }
         }
     }
     
-    public func getTransaction(for id: String, callback: @escaping ((Either<Error, MonzoTransactionWrapper>) -> Void)){
+    public func getTransaction(for id: String, callback: @escaping ((Either<Error, MonzoTransaction>) -> Void)){
         guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
             return
@@ -153,7 +140,11 @@ public class Monzo {
         Network.request(url: URL(string: url)!, headers: defaultHeaders) { (response) in
             switch response {
             case .result(let result):
-                self.parseJSON(to: MonzoTransactionWrapper.self, from: result, then: callback)
+                guard let transaction = self.extractField("transaction", from: result) else {
+                    callback(Either.error(MonzoError.decodingError))
+                    return
+                }
+                self.parseJSON(to: MonzoTransaction.self, from: transaction, then: callback)
             case .error(let error):
                 callback(Either.error(error))
             }
@@ -170,6 +161,16 @@ public class Monzo {
         } catch let error {
             callback(Either.error(error))
         }
+    }
+    
+    // This returns the object for a given field in the JSON.
+    private func extractField(_ field: String, from data: Data) -> Data? {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+           let dict = json as? [String : Any],
+           let requestedObject = dict[field] {
+            return try? JSONSerialization.data(withJSONObject: requestedObject, options: .sortedKeys)
+        }
+        return nil
     }
     
 }
