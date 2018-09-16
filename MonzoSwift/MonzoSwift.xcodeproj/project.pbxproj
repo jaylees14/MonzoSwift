@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		693DC057211A2E93006A1143 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693DC056211A2E93006A1143 /* NetworkError.swift */; };
 		69AD0EF620AE12AF00C44930 /* MonzoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */; };
 		69AD0EFB20AE12AF00C44930 /* MonzoSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */; };
 		69AD0EFD20AE12B000C44930 /* MonzoSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,6 +17,8 @@
 		69AD0F1920AE13AE00C44930 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1720AE13AE00C44930 /* Network.swift */; };
 		69AD0F1B20AE167A00C44930 /* MonzoAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */; };
 		69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD0F1E20AE188A00C44930 /* MonzoError.swift */; };
+		69CA047420B5D77E003C5523 /* MonzoAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CA047320B5D77E003C5523 /* MonzoAuthentication.swift */; };
+		69EE48A120B0BF42000C9518 /* MonzoTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		693DC056211A2E93006A1143 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		6986AB7D214EB62900BE7BB6 /* MonzoToken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonzoToken.txt; sourceTree = "<group>"; };
 		69AD0EEC20AE12AF00C44930 /* MonzoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MonzoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AD0EEF20AE12AF00C44930 /* MonzoSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonzoSwift.h; sourceTree = "<group>"; };
 		69AD0EF020AE12AF00C44930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,7 +46,8 @@
 		69AD0F1720AE13AE00C44930 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAccount.swift; sourceTree = "<group>"; };
 		69AD0F1E20AE188A00C44930 /* MonzoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoError.swift; sourceTree = "<group>"; };
-		69C9F20120B0455F00BB6E3D /* MonzoToken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonzoToken.txt; sourceTree = "<group>"; };
+		69CA047320B5D77E003C5523 /* MonzoAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoAuthentication.swift; sourceTree = "<group>"; };
+		69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonzoTransaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		693DC055211A2E85006A1143 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				69AD0F1720AE13AE00C44930 /* Network.swift */,
+				693DC056211A2E93006A1143 /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		69AD0EE220AE12AF00C44930 = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +112,7 @@
 			children = (
 				69AD0EFA20AE12AF00C44930 /* MonzoSwiftTests.swift */,
 				69AD0EFC20AE12AF00C44930 /* Info.plist */,
-				69C9F20120B0455F00BB6E3D /* MonzoToken.txt */,
+				6986AB7D214EB62900BE7BB6 /* MonzoToken.txt */,
 			);
 			path = MonzoSwiftTests;
 			sourceTree = "<group>";
@@ -109,6 +124,8 @@
 				69AD0F1120AE139400C44930 /* MonzoBalance.swift */,
 				69AD0F1A20AE167A00C44930 /* MonzoAccount.swift */,
 				69AD0F1E20AE188A00C44930 /* MonzoError.swift */,
+				69EE48A020B0BF42000C9518 /* MonzoTransaction.swift */,
+				69CA047320B5D77E003C5523 /* MonzoAuthentication.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -117,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				69AD0F1620AE13AE00C44930 /* Either.swift */,
-				69AD0F1720AE13AE00C44930 /* Network.swift */,
+				693DC055211A2E85006A1143 /* Network */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -239,7 +256,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi";
+			shellScript = "token_file=${SRCROOT}/MonzoSwiftTests/MonzoToken.txt\ntoken=\"$(cat $token_file)\"\nif [ -n \"$token\" ]; then\n    plutil -replace MonzoToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n    echo 'ERROR: Missing Monzo Token'\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -253,7 +270,10 @@
 				69AD0F1F20AE188A00C44930 /* MonzoError.swift in Sources */,
 				69AD0F1820AE13AE00C44930 /* Either.swift in Sources */,
 				69AD0F1920AE13AE00C44930 /* Network.swift in Sources */,
+				69EE48A120B0BF42000C9518 /* MonzoTransaction.swift in Sources */,
+				693DC057211A2E93006A1143 /* NetworkError.swift in Sources */,
 				69AD0F1420AE139400C44930 /* Monzo.swift in Sources */,
+				69CA047420B5D77E003C5523 /* MonzoAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
