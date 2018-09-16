@@ -109,6 +109,11 @@ public class Monzo {
     }
     
     // MARK: - Transactions
+    /// Get all transactions associated with a Monzo Account
+    ///
+    /// - Parameters:
+    ///   - account: The account to fetch transactions for
+    ///   - callback: Response from monzo, either an error or list of MonzoTransaction
     public func getTransactions(for account: MonzoAccount, callback: @escaping (_ transactions: Either<Error, [MonzoTransaction]>) -> Void){
         guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
@@ -130,6 +135,11 @@ public class Monzo {
         }
     }
     
+    /// Get a specific transaction associated with a Monzo Account
+    ///
+    /// - Parameters:
+    ///   - id: Transaction ID
+    ///   - callback: Response from Monzo, either an error or a Monzo Transaction
     public func getTransaction(for id: String, callback: @escaping ((Either<Error, MonzoTransaction>) -> Void)){
         guard accessToken != nil else {
             callback(Either.error(MonzoError.noAccessToken))
