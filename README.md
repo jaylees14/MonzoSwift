@@ -8,8 +8,14 @@ MonzoSwift is a framework for interacting with the Monzo API. The project uses T
 
 ## Installation
 
-— TODO
-
+The project uses SwiftPM as it's main method of distribution. Simply add a dependency in your `Package.swift` file:
+```swift
+...
+dependencies: [
+    .package(url: "https://github.com/jaylees14/MonzoSwift.git", from: "1.0.0"),
+],
+...
+```
 
 
 ## Usage
@@ -29,24 +35,24 @@ Each of the API responses is returned is of type `Either`. This is similar to th
 
 ```swift
 monzo.getAllAccounts { (result) in
-	result.handle( { (error) in 
-       	// Deal with an error if it occurs
-	}, { (accounts) in
-   		// Otherwise deal with the successful accounts
+	  result.handle( { (error) in 
+        // Deal with an error if it occurs
+	  }, { (accounts) in
+   		  // Otherwise deal with the successful accounts
     })
-}
+}   
 ```
 
 ##### Switching over the result
 
 ```swift
 monzo.getAllAccounts { (response) in
-	switch response {
-    case .error(let error):
-       	// Deal with the error
-    case .result(let accounts):
-       	// Otherwise deal with the successful accounts
-	}
+	  switch response {
+      case .error(let error):
+       	  // Deal with the error
+      case .result(let accounts):
+       	  // Otherwise deal with the successful accounts
+	  }
 }
 ```
 
