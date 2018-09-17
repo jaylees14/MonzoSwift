@@ -17,7 +17,7 @@ class MonzoSwiftTests: XCTestCase {
     // MARK: - Test Harness Setup
     override func setUp() {
         // We get the token from an environment variable set on the build machine and for local development
-        if let token = ProcessInfo.processInfo.environment["MONZOTOKEN"] {
+        if let token = ProcessInfo.processInfo.environment["MONZO_TOKEN"] {
             self.testToken = token
         }
         monzo.setAccessToken(testToken)
