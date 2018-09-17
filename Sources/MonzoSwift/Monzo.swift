@@ -182,10 +182,10 @@ public class Monzo {
     
     // This returns the object for a given field in the JSON.
     private func extractField(_ field: String, from data: Data) -> Data? {
-        if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+        if let json = try? JSONSerialization.jsonObject(with: data),
            let dict = json as? [String : Any],
            let requestedObject = dict[field] {
-            return try? JSONSerialization.data(withJSONObject: requestedObject, options: .sortedKeys)
+            return try? JSONSerialization.data(withJSONObject: requestedObject)
         }
         return nil
     }
