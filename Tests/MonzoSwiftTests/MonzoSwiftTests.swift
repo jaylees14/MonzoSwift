@@ -16,10 +16,9 @@ class MonzoSwiftTests: XCTestCase {
     
     // MARK: - Test Harness Setup
     override func setUp() {
-        // We get the Monzo token from the Info.plist, Travis CI deals with this by using an environment variable and passing as an argument
-        // Locally we use a shell script to place the token in the plist during the builds
-        if let path = Bundle(for: MonzoSwiftTests.self).path(forResource: "Info", ofType: "plist"), let info = NSDictionary(contentsOfFile: path) as? [String: Any] {
-            testToken = info["MonzoToken"] as? String ?? ""
+        // We get the token from an environment variable set on the build machine and for local development
+        if let token = ProcessInfo.processInfo.environment["MONZOTOKEN"] {
+            self.testToken = token
         }
         monzo.setAccessToken(testToken)
     }
