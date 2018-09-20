@@ -35,11 +35,11 @@ Each of the API responses is returned is of type `Either`. This is similar to th
 
 ```swift
 monzo.getAllAccounts { (result) in
-	  result.handle( { (error) in 
-        // Deal with an error if it occurs
-	  }, { (accounts) in
-   		  // Otherwise deal with the successful accounts
-    })
+  result.handle( { (error) in 
+    // Deal with an error if it occurs
+  }, { (accounts) in
+    // Otherwise deal with the successful accounts
+  })
 }   
 ```
 
@@ -47,12 +47,12 @@ monzo.getAllAccounts { (result) in
 
 ```swift
 monzo.getAllAccounts { (response) in
-	  switch response {
-      case .error(let error):
-       	  // Deal with the error
-      case .result(let accounts):
-       	  // Otherwise deal with the successful accounts
-	  }
+  switch response {
+  case .error(let error):
+    // Deal with the error
+  case .result(let accounts):
+    // Otherwise deal with the successful accounts
+  }
 }
 ```
 
